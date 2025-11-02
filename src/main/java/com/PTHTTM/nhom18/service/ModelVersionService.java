@@ -2,31 +2,30 @@ package com.PTHTTM.nhom18.service;
 
 import com.PTHTTM.nhom18.model.ModelVersion;
 import com.PTHTTM.nhom18.repository.ModelVersionRepository;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ModelVersionService {
   private final ModelVersionRepository modelVersionRepository;
-  private final RestTemplate restTemplate;
 
-  @Value("${ml.service.activate.url}")
-  private String pythonActiveUrl;
-
-  public ModelVersionService(ModelVersionRepository modelVersionRepository,  RestTemplate restTemplate) {
+  public ModelVersionService(ModelVersionRepository modelVersionRepository) {
     this.modelVersionRepository = modelVersionRepository;
-    this.restTemplate = restTemplate;
   }
 
   public ModelVersion createVersion(String versionName) {
+    throw new IllegalArgumentException("modelType is required. Use createVersion(versionName, modelType)");
+  }
+
+  public ModelVersion createVersion(String versionName, String modelType) {
+    if (modelType == null || modelType.isEmpty()) {
+      throw new IllegalArgumentException("modelType cannot be null or empty");
+    }
+    
     ModelVersion modelVersion = new ModelVersion();
     modelVersion.setName(versionName);
-    modelVersion.setModelType("overall");
+    modelVersion.setModelType(modelType);
     modelVersion.setActive(false);
 
     return modelVersionRepository.save(modelVersion);
@@ -58,9 +57,7 @@ public class ModelVersionService {
     newVersion.setActive(true);
     modelVersionRepository.save(newVersion);
 
-    Map<String, String> payload = new HashMap<>();
-    payload.put("newModelPath", newVersion.getCheckpointUrl());
-    restTemplate.postForEntity(pythonActiveUrl, payload, String.class);
+    // Không cần gọi Python API - chỉ cần update DB là đủ
     return true;
   }
 
@@ -69,7 +66,18 @@ public class ModelVersionService {
   }
 
   public ModelVersion findActiveModelVersion() {
-    ModelVersion activeVersion = this.modelVersionRepository.findByActive(true).get(0);
-    return activeVersion;
+    List<ModelVersion> activeVersions = this.modelVersionRepository.findByActive(true);
+    if (activeVersions.isEmpty()) {
+      return null;  // Hoặc throw exception tùy logic
+    }
+    return activeVersions.get(0);
+  }
+  
+  public ModelVersion findActiveModelByType(String modelType) {
+    List<ModelVersion> activeVersions = this.modelVersionRepository.findByActiveAndModelType(true, modelType);
+    if (activeVersions.isEmpty()) {
+      return null;
+    }
+    return activeVersions.get(0);
   }
 }

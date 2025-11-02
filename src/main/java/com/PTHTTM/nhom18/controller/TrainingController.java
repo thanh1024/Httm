@@ -38,9 +38,20 @@ public class TrainingController {
   }
 
   @GetMapping("/form")
-  public String trainingPage(Model model) {
-    List<DataSource> sourceList = this.dataSourceService.getDataSource();
+  public String trainingPage(
+      @RequestParam(value = "modelType", required = false) String modelType,
+      Model model
+  ) {
+    List<DataSource> sourceList;
+    
+    if (modelType != null && !modelType.isEmpty()) {
+      sourceList = this.dataSourceService.getDataSourceByType(modelType);
+    } else {
+      sourceList = this.dataSourceService.getDataSource();
+    }
+    
     model.addAttribute("dataSources", sourceList);
+    model.addAttribute("selectedModelType", modelType);
 
     return "training-form";
   }
@@ -49,19 +60,25 @@ public class TrainingController {
   public String startTraining(
       @RequestParam("versionName") String versionName,
       @RequestParam(value = "dataSourceIds", required = false) List<Long> dataSourceIds,
+      @RequestParam("modelType") String modelType,
       RedirectAttributes redirectAttributes
   ){
     if (versionName == null || versionName.trim().isEmpty()) {
-      redirectAttributes.addFlashAttribute("error", "Please enter a version name");
+      redirectAttributes.addFlashAttribute("error", "Vui lòng nhập tên phiên bản model");
+      return "redirect:/admin/training/form";
+    }
+
+    if (modelType == null || modelType.trim().isEmpty()) {
+      redirectAttributes.addFlashAttribute("error", "Vui lòng chọn loại model (General hoặc Aspect)");
       return "redirect:/admin/training/form";
     }
 
     if (dataSourceIds == null || dataSourceIds.isEmpty()) {
-      redirectAttributes.addFlashAttribute("error", "Please select at least one Data Source to train on.");
+      redirectAttributes.addFlashAttribute("error", "Vui lòng chọn ít nhất một nguồn dữ liệu để huấn luyện");
       return "redirect:/admin/training/form";
     }
 
-    TrainingJob job = trainingJobService.createTrainingJob(versionName, dataSourceIds);
+    TrainingJob job = trainingJobService.createTrainingJob(versionName, dataSourceIds, modelType);
     return  "redirect:/admin/training/status/" + job.getId();
   }
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <%-- Cần cho format số và ngày --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%-- Cần cho substring --%>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -151,23 +152,42 @@
         margin-bottom: 20px;
       }
 
-      /* Responsive */
-      @media (max-width: 900px) {
-        .panels {
-          grid-template-columns: 1fr;
-        }
-        .metrics {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 600px) {
-        main {
-          padding: 16px;
-        }
-        .metrics {
-          grid-template-columns: 1fr;
-        }
-      }
+                  /* Data sources section */
+                  .data-sources-section {
+                    margin-top: 16px;
+                    padding-top: 16px;
+                    border-top: 1px solid var(--border);
+                  }
+                  .data-sources-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                  }
+                  .data-source-item {
+                    padding: 8px 12px;
+                    background: #f9fafb;
+                    border: 1px solid var(--border);
+                    border-radius: 6px;
+                    font-size: 13px;
+                  }
+
+                  /* Responsive */
+                  @media (max-width: 900px) {
+                    .panels {
+                      grid-template-columns: 1fr;
+                    }
+                    .metrics {
+                      grid-template-columns: repeat(2, 1fr);
+                    }
+                  }
+                  @media (max-width: 600px) {
+                    main {
+                      padding: 16px;
+                    }
+                    .metrics {
+                      grid-template-columns: 1fr;
+                    }
+                  }
     </style>
 </head>
 <body>
@@ -193,51 +213,66 @@
             <div class="panel-head">
                 <div>
                     <div class="panel-title">Mô hình cảm xúc tổng quát (Active)</div>
-                    <c:if test="${not empty activeModel}">
+                    <c:if test="${not empty generalModel}">
                         <div class="panel-sub">
-                            Phiên bản: <strong>${activeModel.name}</strong>
-<%--                            | Kích hoạt:--%>
-<%--                            <fmt:formatDate value="${activeModel.createdAt}" pattern="dd/MM/yyyy HH:mm" />--%>
+                            Phiên bản: <strong>${generalModel.name}</strong>
                         </div>
                     </c:if>
                 </div>
             </div>
 
-            <c:choose>
-                <c:when test="${not empty activeResult}">
-                    <div class="metrics">
-                        <div class="metric">
-                            <h4>Điểm F1 (Macro)</h4>
-                            <div class="val">
-                                <fmt:formatNumber value="${activeResult.f1Score}" pattern="#0.0000" />
-                            </div>
-                        </div>
-                        <div class="metric">
-                            <h4>Độ chính xác</h4>
-                            <div class="val">
-                                <fmt:formatNumber value="${activeResult.accuracy}" pattern="#0.0000" />
-                            </div>
-                        </div>
-                        <div class="metric">
-                            <h4>Precision (Macro)</h4>
-                            <div class="val">
-                                <fmt:formatNumber value="${activeResult.precision}" pattern="#0.0000" />
-                            </div>
-                        </div>
-                        <div class="metric">
-                            <h4>Recall (Macro)</h4>
-                            <div class="val">
-                                <fmt:formatNumber value="${activeResult.recall}" pattern="#0.0000" />%
-                            </div>
-                        </div>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <p style="color: var(--muted);">Chưa có mô hình nào được kích hoạt hoặc không tìm thấy kết quả.</p>
-                </c:otherwise>
-            </c:choose>
+                        <c:choose>
+                            <c:when test="${not empty generalResult}">
+                                <div class="metrics">
+                                    <div class="metric">
+                                        <h4>Điểm F1 (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${generalResult.f1Score}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Độ chính xác</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${generalResult.accuracy}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Precision (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${generalResult.precision}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Recall (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${generalResult.recall}" pattern="#0.0000" />%
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hiển thị data sources đã train -->
+                                <c:if test="${not empty generalDataSources}">
+                                    <div class="data-sources-section">
+                                        <h4 style="margin: 16px 0 8px 0; font-size: 14px; color: #374151;">Dữ liệu đã sử dụng:</h4>
+                                        <div class="data-sources-list">
+                                            <c:forEach var="ds" items="${generalDataSources}">
+                                                <div class="data-source-item">
+                                                    <strong>${ds.name}</strong>
+                                                    <small style="color: #6b7280; display: block;">
+                                                        Type: ${ds.modelType} | Created: ${fn:substring(ds.createdAt, 0, 16)}
+                                                    </small>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:when>
+                            <c:otherwise>
+                                <p style="color: var(--muted);">Chưa có mô hình General nào được kích hoạt.</p>
+                            </c:otherwise>
+                        </c:choose>
 
-            <a href="/admin/training/form" class="btn">
+            <a href="/admin/training/form?modelType=general" class="btn">
                 Huấn luyện phiên bản mới
             </a>
         </article>
@@ -245,33 +280,69 @@
         <article class="panel">
             <div class="panel-head">
                 <div>
-                    <div class="panel-title">Mô hình dựa trên khía cạnh</div>
-                    <div class="panel-sub">
-                        Cập nhật lần cuối: (Chưa hỗ trợ)
-                    </div>
+                    <div class="panel-title">Mô hình dựa trên khía cạnh (Active)</div>
+                    <c:if test="${not empty aspectModel}">
+                        <div class="panel-sub">
+                            Phiên bản: <strong>${aspectModel.name}</strong>
+                        </div>
+                    </c:if>
                 </div>
             </div>
 
-            <div class="metrics">
-                <div class="metric">
-                    <h4>Điểm F1</h4>
-                    <div class="val" style="color: var(--muted);">N/A</div>
-                </div>
-                <div class="metric">
-                    <h4>Độ chính xác</h4>
-                    <div class="val" style="color: var(--muted);">N/A</div>
-                </div>
-                <div class="metric">
-                    <h4>Precision</h4>
-                    <div class="val" style="color: var(--muted);">N/A</div>
-                </div>
-                <div class="metric">
-                    <h4>Recall</h4>
-                    <div class="val" style="color: var(--muted);">N/A%</div>
-                </div>
-            </div>
+                        <c:choose>
+                            <c:when test="${not empty aspectResult}">
+                                <div class="metrics">
+                                    <div class="metric">
+                                        <h4>Điểm F1 (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${aspectResult.f1Score}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Độ chính xác</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${aspectResult.accuracy}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Precision (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${aspectResult.precision}" pattern="#0.0000" />
+                                        </div>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Recall (Macro)</h4>
+                                        <div class="val">
+                                            <fmt:formatNumber value="${aspectResult.recall}" pattern="#0.0000" />%
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hiển thị data sources đã train -->
+                                <c:if test="${not empty aspectDataSources}">
+                                    <div class="data-sources-section">
+                                        <h4 style="margin: 16px 0 8px 0; font-size: 14px; color: #374151;">Dữ liệu đã sử dụng:</h4>
+                                        <div class="data-sources-list">
+                                            <c:forEach var="ds" items="${aspectDataSources}">
+                                                <div class="data-source-item">
+                                                    <strong>${ds.name}</strong>
+                                                    <small style="color: #6b7280; display: block;">
+                                                        Type: ${ds.modelType} | Created: ${fn:substring(ds.createdAt, 0, 16)}
+                                                    </small>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:when>
+                            <c:otherwise>
+                                <p style="color: var(--muted);">Chưa có mô hình Aspect nào được kích hoạt.</p>
+                            </c:otherwise>
+                        </c:choose>
 
-            <a class="btn" disabled href="/admin/training/form">Huấn luyện lại mô hình</a>
+            <a href="/admin/training/form?modelType=aspect" class="btn">
+                Huấn luyện phiên bản mới
+            </a>
         </article>
 
     </section>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <%-- Import JSTL Format (cho ngày tháng) --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -214,43 +215,103 @@
             <div class="panel-title">Cấu hình huấn luyện</div>
         </div>
 
-        <form method="POST" action="/admin/training/start">
+        <form method="POST" action="/admin/training/start" id="trainingForm">
+            <!-- Bước 1: Chọn loại model -->
             <div class="form-group">
-                <label for="versionName">Tên phiên bản mô hình mới:</label>
-                <input type="text" id="versionName" name="versionName" class="form-control"
-                       placeholder="e.g., v1.1-improved" required>
+                <label for="modelType">Loại Model <span style="color: red;">*</span></label>
+                <select id="modelType" name="modelType" class="form-control" required onchange="filterDataSources()">
+                    <option value="">-- Chọn loại model --</option>
+                    <option value="general" ${selectedModelType == 'general' ? 'selected' : ''}>General Sentiment (Tổng quát)</option>
+                    <option value="aspect" ${selectedModelType == 'aspect' ? 'selected' : ''}>Aspect-Based Sentiment (Theo khía cạnh)</option>
+                </select>
+                <small style="color: #6b7280; display: block; margin-top: 4px;">
+                    General: Phân tích sentiment tổng quan. Aspect: Phân tích theo từng khía cạnh (nội dung, hình thức, giá cả,...)
+                </small>
             </div>
 
+            <!-- Bước 2: Tên phiên bản -->
             <div class="form-group">
-                <label>Chọn nguồn dữ liệu để huấn luyện:</label>
+                <label for="versionName">Tên phiên bản mô hình mới <span style="color: red;">*</span></label>
+                <input type="text" id="versionName" name="versionName" class="form-control"
+                       placeholder="e.g., general_v1.1 hoặc aspect_v2.0" required>
+            </div>
+
+            <!-- Bước 3: Chọn data sources -->
+            <div class="form-group">
+                <label>Chọn nguồn dữ liệu để huấn luyện <span style="color: red;">*</span></label>
+                <c:if test="${not empty selectedModelType}">
+                    <small style="color: #6b7280; display: block; margin-bottom: 8px;">
+                        Đang hiển thị data sources cho model: <strong>${selectedModelType}</strong>
+                    </small>
+                </c:if>
 
                 <div class="data-source-list">
                     <c:choose>
                         <c:when test="${not empty dataSources}">
                             <c:forEach var="ds" items="${dataSources}">
-                                <%-- Áp dụng style .data-source-item --%>
                                 <label class="data-source-item">
                                     <input type="checkbox" name="dataSourceIds" value="${ds.id}">
-                                        ${ds.name}
-                                        <%-- Thêm class .date và format ngày tháng --%>
+                                    <div>
+                                        <strong>${ds.name}</strong>
+                                        <small style="color: #6b7280; display: block;">
+                                            Type: ${ds.modelType} | Created: ${fn:substring(ds.createdAt, 0, 16)}
+                                        </small>
+                                    </div>
                                 </label>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <p>Không tìm thấy nguồn dữ liệu.
-                                Vui lòng <a href="/admin/data/upload">tải lên dữ liệu</a> trước.
+                            <p style="color: #6b7280;">
+                                <c:choose>
+                                    <c:when test="${not empty selectedModelType}">
+                                        Không tìm thấy nguồn dữ liệu cho model type <strong>${selectedModelType}</strong>.
+                                    </c:when>
+                                    <c:otherwise>
+                                        Vui lòng chọn loại model ở trên để hiển thị nguồn dữ liệu tương ứng.
+                                    </c:otherwise>
+                                </c:choose>
+                                <a href="/admin/data/upload">Tải lên dữ liệu mới</a>
                             </p>
                         </c:otherwise>
                     </c:choose>
                 </div>
             </div>
 
-            <button type="submit" class="btn" <c:if test="${empty dataSources}">disabled</c:if> >
+            <button type="submit" class="btn" 
+                    <c:if test="${empty dataSources || empty selectedModelType}">disabled</c:if>>
                 Bắt đầu Huấn luyện
             </button>
         </form>
     </article>
 </main>
+
+<script>
+    function filterDataSources() {
+        const modelType = document.getElementById('modelType').value;
+        if (modelType) {
+            // Reload page với modelType parameter để filter data sources
+            window.location.href = '/admin/training/form?modelType=' + modelType;
+        }
+    }
+    
+    // Validate form trước khi submit
+    document.getElementById('trainingForm').addEventListener('submit', function(e) {
+        const modelType = document.getElementById('modelType').value;
+        const checkedBoxes = document.querySelectorAll('input[name="dataSourceIds"]:checked');
+        
+        if (!modelType) {
+            e.preventDefault();
+            alert('Vui lòng chọn loại model');
+            return false;
+        }
+        
+        if (checkedBoxes.length === 0) {
+            e.preventDefault();
+            alert('Vui lòng chọn ít nhất một nguồn dữ liệu');
+            return false;
+        }
+    });
+</script>
 
 </body>
 </html>

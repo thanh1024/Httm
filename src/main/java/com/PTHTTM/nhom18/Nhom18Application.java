@@ -2,10 +2,12 @@ package com.PTHTTM.nhom18;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @SpringBootApplication
 @EnableAsync
@@ -16,8 +18,12 @@ public class Nhom18Application {
 	}
 
   @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder.build();
+  public RestTemplate restTemplate() {
+    RestTemplate restTemplate = new RestTemplate();
+    // Thêm JSON message converter
+    MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+    restTemplate.setMessageConverters(Collections.singletonList(jsonConverter));
+    return restTemplate;
   }
 
 }

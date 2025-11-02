@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblTrainingJob")
+@Table(name = "tbl_training_job")
 @Getter
 @Setter
 public class TrainingJob {
@@ -23,12 +23,13 @@ public class TrainingJob {
   private long id;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tblModelVersionid")
+  @JoinColumn(name = "tbl_model_versionid")
   private ModelVersion modelVersion;
 
   @Column
   private String status;
-  @Column(columnDefinition = "TEXT")
+  
+  @Column(name = "error_message", columnDefinition = "TEXT")
   private String errorMessage;
 
   @OneToOne(

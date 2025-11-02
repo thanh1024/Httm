@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ModelVersionRepository extends JpaRepository<ModelVersion, Long> {
 
   List<ModelVersion> findByActive(boolean active);
+  
+  List<ModelVersion> findByActiveAndModelType(boolean active, String modelType);
 }

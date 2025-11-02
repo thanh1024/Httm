@@ -15,22 +15,25 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "tblTrainingResult")
+@Table(name = "tbl_training_result")
 public class TrainingResult {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tblTrainingJobid", unique = true)
+  @JoinColumn(name = "tbl_training_jobid", unique = true)
   private TrainingJob job;
 
   @Column
   private double accuracy;
-  @Column
+  
+  @Column(name = "f1score")
   private double f1Score;
-  @Column
+  
+  @Column(name = "`recall`")  // Backticks because 'recall' is MySQL reserved keyword
   private double recall;
-  @Column
+  
+  @Column(name = "`precision`")  // Backticks because 'precision' is MySQL reserved keyword
   private double precision;
 }

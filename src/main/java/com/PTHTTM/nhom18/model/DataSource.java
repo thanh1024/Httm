@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblDataSource")
+@Table(name = "tbl_data_source")
 @Getter
 @Setter
 public class DataSource {
@@ -26,11 +26,13 @@ public class DataSource {
   @Column(nullable = false)
   private String name;
 
+  @Column(name = "model_type", nullable = false)
+  private String modelType;  // "general" hoặc "aspect"
 
-  @Column(nullable = false)
+  @Column(name = "created_at", nullable = false)
   private LocalDateTime createdAt = LocalDateTime.now();
 
-  @Column
+  @Column(name = "file_url")
   private String fileUrl;
 
 }

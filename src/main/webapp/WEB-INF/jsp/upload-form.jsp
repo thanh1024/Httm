@@ -185,7 +185,7 @@
 
     <article class="panel">
         <div class="panel-head">
-            <div class="panel-title">Tải lên tệp Excel (.xlsx)</div>
+            <div class="panel-title">Tải lên tệp dữ liệu (Excel/CSV)</div>
         </div>
 
         <form method="POST" action="/admin/data/upload" enctype="multipart/form-data">
@@ -197,9 +197,25 @@
             </div>
 
             <div class="form-group">
-                <label for="file">Chọn tệp Excel:</label>
+                <label for="modelType">Loại Model <span style="color: red;">*</span></label>
+                <select id="modelType" name="modelType" class="form-control" required>
+                    <option value="">-- Chọn loại model --</option>
+                    <option value="general">General Sentiment (Tổng quát)</option>
+                    <option value="aspect">Aspect-Based Sentiment (Theo khía cạnh)</option>
+                </select>
+                <small style="color: #6b7280; display: block; margin-top: 4px;">
+                    General: Dữ liệu để train model phân tích sentiment tổng quan<br>
+                    Aspect: Dữ liệu để train model phân tích theo từng khía cạnh
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="file">Chọn tệp Excel/CSV:</label>
                 <input type="file" id="file" name="file" class="form-control"
-                       accept=".xlsx, .xls" required>
+                       accept=".xlsx, .xls, .csv" required>
+                <small style="color: #6b7280; display: block; margin-top: 4px;">
+                    Chấp nhận file: .xlsx, .xls, .csv (phân cách bằng dấu |)
+                </small>
             </div>
 
             <button type="submit" class="btn">Tải lên và Lưu</button>

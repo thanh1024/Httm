@@ -16,4 +16,8 @@ public class DataSourceService {
   public List<DataSource> getDataSource() {
     return dataSourceRepository.findAllByOrderByCreatedAtDesc();
   }
+  
+  public List<DataSource> getDataSourceByType(String modelType) {
+    return dataSourceRepository.findByModelTypeOrderByCreatedAtDesc(modelType);
+  }
 }

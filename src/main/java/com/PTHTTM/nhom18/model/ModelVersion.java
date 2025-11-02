@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "tblModelVersion")
+@Table(name = "tbl_model_version")
 public class ModelVersion {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,13 @@ public class ModelVersion {
   @Column(nullable = false)
   private String name;
 
-  @Column
+  @Column(name = "checkpoint_url")
   private String checkpointUrl;
 
   @Column(nullable = false)
   private boolean active;
 
-  @Column(nullable = false)
+  @Column(name = "model_type", nullable = false)
   private String modelType;
 
   @OneToOne(
@@ -41,6 +41,7 @@ public class ModelVersion {
 
   @Column
   private String notes;
-  @Column
+  
+  @Column(name = "created_at")
   private LocalDateTime createdAt = LocalDateTime.now();
 }

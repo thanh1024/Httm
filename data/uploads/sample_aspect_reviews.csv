@@ -1,0 +1,146 @@
+text|rating|product_id|product_name
+Sách rất hay, nội dung sâu sắc và bổ ích. Tuy nhiên giấy hơi bạc, in ấn chưa được đẹp lắm.|4|1|Đắc Nhân Tâm
+Nội dung tuyệt vời, dịch thuật chuẩn xác. Bìa cứng đẹp, giấy tốt. Đóng gói cẩn thận, giao hàng nhanh.|5|1|Đắc Nhân Tâm
+Câu chuyện hay, bài học ý nghĩa. Nhưng giá hơi đắt so với chất lượng giấy.|3|1|Đắc Nhân Tâm
+Sách tuyệt vời! Nội dung dễ hiểu, phong cách viết hấp dẫn. Shop giao hàng rất nhanh.|5|2|Sapiens
+Kiến thức phong phú, góc nhìn mới mẻ. Bìa đẹp, in ấn rõ nét. Đáng tiền!|5|2|Sapiens
+Nội dung khá hay nhưng dịch hơi khó hiểu. Giấy tốt, bìa cứng sang trọng.|4|2|Sapiens
+Sách rất chán, nội dung nhàm. Giấy mỏng, in mờ. Không đáng giá tiền.|1|3|Tuổi Trẻ Đáng Giá
+Bài học hay, phù hợp tuổi trẻ. Tuy nhiên bìa bị rách một góc, đóng gói không cẩn thận.|3|3|Tuổi Trẻ Đáng Giá
+Nội dung ổn, giá hợp lý. Giao hàng hơi chậm nhưng shop hỗ trợ nhiệt tình.|4|3|Tuổi Trẻ Đáng Giá
+Cuốn sách tuyệt vời! Câu chuyện cảm động, thông điệp sâu sắc. Bìa đẹp, giấy dày dặn.|5|4|Nhà Giả Kim
+Nội dung hay nhưng bản dịch chưa tốt. Nhiều lỗi chính tả. Giấy ổn.|3|4|Nhà Giả Kim
+Truyện hay, dễ đọc. Bìa mềm nên hơi dễ cong. Giá tốt, giao nhanh.|4|4|Nhà Giả Kim
+Sách rất bổ ích, kiến thức tâm lý học hay. In ấn đẹp, giấy tốt. Đóng gói kỹ.|5|5|Tâm Lý Học Về Tiền
+Nội dung khô khan, khó hiểu. Giấy tốt nhưng giá hơi cao.|2|5|Tâm Lý Học Về Tiền
+Hay lắm! Nhiều insight bổ ích. Bìa cứng đẹp. Ship nhanh, freeship nữa.|5|5|Tâm Lý Học Về Tiền
+Sách ok, nội dung bình thường. Giấy hơi bạc, bìa mềm. Giá hợp lý.|3|6|Atomic Habits
+Tuyệt vời! Thay đổi mindset hoàn toàn. Bản dịch chuẩn, dễ hiểu. Chất lượng in ấn tốt.|5|6|Atomic Habits
+Nội dung hay nhưng đã đọc nhiều sách tương tự. Bìa đẹp, seal nguyên. Giao hàng cẩn thận.|4|6|Atomic Habits
+Sách hay, viết dễ hiểu. Nhưng shop giao sai màu bìa. Phải liên hệ đổi trả.|3|7|Thinking Fast and Slow
+Kiến thức sâu, nghiên cứu kỹ lưỡng. Dịch hơi khó nhưng chất lượng giấy tốt.|4|7|Thinking Fast and Slow
+Nội dung quá khó, không phù hợp người mới. Giấy dày, in đẹp. Giá đắt.|2|7|Thinking Fast and Slow
+Cuốn sách tuyệt vời cho lập trình viên! Code examples rõ ràng. Giấy tốt, bìa cứng.|5|8|Clean Code
+Hay nhưng cũ rồi, có kiến thức outdated. Bìa hơi móp, có vết ố.|3|8|Clean Code
+Must-read cho dev! Nội dung chất lượng. Giá hơi cao nhưng đáng đồng tiền.|5|8|Clean Code
+Sách hay, dễ áp dụng. Bìa đẹp xinh, giấy thơm. Giao nhanh, đóng gói cute.|5|9|The Subtle Art
+Nội dung thẳng thắn, thực tế. Dịch tốt. Giấy ổn, bìa mềm hơi cong góc.|4|9|The Subtle Art
+Hay lắm! Perspective mới mẻ. Nhưng shop giao chậm, không báo trước.|4|9|The Subtle Art
+Truyện cực kỳ hay và cảm động. Dịch đẹp, giữ được tinh thần gốc. In ấn chất lượng cao.|5|10|Tôi Thấy Hoa Vàng
+Câu chuyện tuổi thơ đẹp. Bìa mềm, giấy hơi mỏng. Giá rẻ, đáng mua.|4|10|Tôi Thấy Hoa Vàng
+Hay nhưng hơi buồn. Lỗi chính tả nhiều. Bìa bẩn, seal bong góc.|2|10|Tôi Thấy Hoa Vàng
+Sách kinh tế hay! Phân tích sâu, dữ liệu cụ thể. Giấy dày, in rõ nét.|5|11|Kinh Tế Học Vĩ Mô
+Nội dung hàn lâm, khó đọc. Bìa cứng đẹp nhưng giá quá cao.|2|11|Kinh Tế Học Vĩ Mô
+Ổn cho sinh viên. Nhiều ví dụ thực tế. Giấy tốt, giao đúng hẹn.|4|11|Kinh Tế Học Vĩ Mô
+Marketing căn bản hay! Dễ hiểu, thực chiến. Bìa xinh, giấy tốt. Ship hỏa tốc.|5|12|Marketing 4.0
+Nội dung lỗi thời. Giấy bạc, in mờ. Không recommend.|1|12|Marketing 4.0
+Case studies hay! Áp dụng được ngay. Giá hợp lý, đóng gói kỹ.|5|12|Marketing 4.0
+Python cơ bản tốt cho newbie. Code rõ ràng. Bìa mềm, giấy ổn.|4|13|Python Crash Course
+Hay nhưng thiếu practice. In ấn đẹp, bìa cứng. Giao nhanh.|4|13|Python Crash Course
+Perfect cho beginner! Examples nhiều. Chất lượng in tốt. Giá hơi cao.|4|13|Python Crash Course
+Triết lý sống hay! Thay đổi tư duy. Dịch tốt. Bìa đẹp, giấy dày.|5|14|Đời Ngắn Đừng Ngủ Dài
+Nội dung ổn nhưng hơi chung chung. Giấy mỏng, bìa mềm. Giá ok.|3|14|Đời Ngắn Đừng Ngủ Dài
+Motivate tốt! Đọc nhanh, dễ hiểu. Seal nguyên, bao sách kỹ.|5|14|Đời Ngắn Đừng Ngủ Dài
+Văn học hay! Lối viết đẹp. Bản dịch xuất sắc. In ấn sang trọng.|5|15|Số Đỏ
+Truyện hay nhưng hơi khó. Giấy tốt, bìa cứng. Đóng gói cẩn thận.|4|15|Số Đỏ
+Kinh điển văn học. Nội dung sâu sắc. Giá hợp lý cho chất lượng.|5|15|Số Đỏ
+Lịch sử Việt Nam hay! Nhiều tư liệu. Bìa đẹp, giấy dày. Hơi nặng.|5|16|Đại Việt Sử Ký
+Nội dung học thuật, khô khan. In ấn tốt. Giá cao.|3|16|Đại Việt Sử Ký
+Bổ ích cho người yêu sử. Dữ liệu phong phú. Giao hàng cẩn thận.|4|16|Đại Việt Sử Ký
+Self-help hay! Practical advice. Dịch tốt, đọc dễ. Bìa xinh.|5|17|7 Thói Quen
+Nội dung lặp lại nhiều. Giấy ổn. Giá hơi đắt.|3|17|7 Thói Quen
+Classic! Must-read. Chất lượng in tốt. Đóng gói đẹp.|5|17|7 Thói Quen
+Tiểu thuyết hay! Cốt truyện hấp dẫn. Dịch lưu loát. Bìa đẹp mắt.|5|18|Sherlock Holmes
+Trinh thám hay! Giấy tốt, in rõ. Nhưng giao hơi lâu.|4|18|Sherlock Holmes
+Truyện hay nhưng bản dịch lỗi nhiều. Giá rẻ, bìa mềm.|3|18|Sherlock Holmes
+Sách thiếu nhi hay! Hình minh họa đẹp. Giấy bóng, màu sắc tươi.|5|19|Hoàng Tử Bé
+Câu chuyện ý nghĩa. Dịch đẹp. Bìa cứng, chất lượng cao.|5|19|Hoàng Tử Bé
+Hay cho cả người lớn. Giá tốt. Đóng gói cẩn thận.|5|19|Hoàng Tử Bé
+Tiểu thuyết lãng mạn hay! Cảm động. Dịch tốt. Bìa xinh, giấy thơm.|5|20|Mắt Biếc
+Truyện buồn quá. Giấy mỏng, bìa mềm. Giá rẻ.|3|20|Mắt Biếc
+Văn chương Việt đẹp! Lối kể hay. Chất lượng tốt, giao nhanh.|5|20|Mắt Biếc
+Sách nấu ăn hay! Công thức đơn giản. Hình ảnh đẹp, giấy bóng.|5|21|Món Việt
+Recipes dễ làm. Nhưng một số trang bị dính mực. Giá ok.|3|21|Món Việt
+Bổ ích cho nội trợ. Hình ảnh full màu. Bìa cứng, giấy dày.|5|21|Món Việt
+Du lịch cẩm nang tốt! Info chi tiết. Map rõ ràng. Giấy dày, bền.|5|22|Cẩm Nang Du Lịch
+Hữu ích nhưng info cũ. Một số địa điểm không còn. Giá hợp lý.|3|22|Cẩm Nang Du Lịch
+Perfect cho backpacker! Tips hay. Bìa mềm, nhẹ, dễ mang.|5|22|Cẩm Nang Du Lịch
+Yoga guide hay! Hình minh họa rõ ràng. Giấy tốt, bìa bóng.|5|23|Yoga Cơ Bản
+Instructions dễ hiểu. Nhưng in hơi mờ. Giá rẻ.|3|23|Yoga Cơ Bản
+Bổ ích cho beginner. Poses đa dạng. Chất lượng ổn.|4|23|Yoga Cơ Bản
+Sách fitness hay! Workout plans chi tiết. Giấy bóng, hình ảnh đẹp.|5|24|Gym Cho Người Mới
+Exercises đơn giản. Nhưng thiếu video demo. Bìa mềm.|3|24|Gym Cho Người Mới
+Practical guide! Nutrition info hay. Giao đúng hẹn.|5|24|Gym Cho Người Mới
+Sách thai giáo hay! Kiến thức y khoa chuẩn. Hình ảnh minh họa đầy đủ.|5|25|Mẹ Bầu Khỏe Mạnh
+Bổ ích cho mẹ bầu. Dễ hiểu. Giấy tốt, bìa cứng.|5|25|Mẹ Bầu Khỏe Mạnh
+Info chi tiết. Nhưng hơi nhiều text. Giá hợp lý.|4|25|Mẹ Bầu Khỏe Mạnh
+Nuôi con khoa học! Tips thực tế. Giấy tốt, dễ đọc.|5|26|Nuôi Con Thông Minh
+Hay cho ba mẹ mới. Giá tốt. Nhưng bìa hơi nhăn.|4|26|Nuôi Con Thông Minh
+Must-have cho parents! Examples nhiều. Chất lượng cao.|5|26|Nuôi Con Thông Minh
+Sách làm vườn hay! Hướng dẫn chi tiết. Hình ảnh đẹp, giấy bóng.|5|27|Vườn Rau Sạch
+Dễ áp dụng. Nhưng thiếu tips chăm sóc. Bìa mềm.|3|27|Vườn Rau Sạch
+Bổ ích cho người thích trồng cây. Giá ok, giao nhanh.|4|27|Vườn Rau Sạch
+Design thinking hay! Case studies thực tế. In ấn đẹp, giấy tốt.|5|28|Creative Design
+Nội dung chất lượng. Nhưng giá hơi cao. Bìa cứng đẹp.|4|28|Creative Design
+Must-read cho designer! Inspirational. Đóng gói cẩn thận.|5|28|Creative Design
+Photography guide tốt! Kỹ thuật rõ ràng. Hình ảnh full HD, giấy bóng.|5|29|Nhiếp Ảnh Cơ Bản
+Dễ hiểu cho newbie. Giá hợp lý. Nhưng bìa hơi mỏng.|4|29|Nhiếp Ảnh Cơ Bản
+Hay! Nhiều ví dụ thực tế. Chất lượng in tuyệt vời.|5|29|Nhiếp Ảnh Cơ Bản
+Sách vẽ hay! Bước by bước. Giấy sketch tốt kèm theo.|5|30|Học Vẽ Tranh
+Dễ học. Nhưng giấy trong sách hơi mỏng. Giá ok.|3|30|Học Vẽ Tranh
+Perfect cho beginner! Techniques đa dạng. Bìa cứng đẹp.|5|30|Học Vẽ Tranh
+Âm nhạc lý thuyết hay! Notes rõ ràng. In ấn chuẩn, giấy trắng.|5|31|Nhạc Lý Cơ Bản
+Dễ hiểu. Nhưng thiếu audio examples. Bìa mềm.|3|31|Nhạc Lý Cơ Bản
+Bổ ích cho người học nhạc. Giá tốt, giao đúng hẹn.|4|31|Nhạc Lý Cơ Bản
+Guitar tutorial hay! Tabs rõ ràng. Giấy tốt, bìa bóng.|5|32|Tự Học Guitar
+Easy to follow. Nhưng QR code video không work. Giá ok.|3|32|Tự Học Guitar
+Great cho beginner! Bài bản, chi tiết. Chất lượng cao.|5|32|Tự Học Guitar
+Tiếng Anh giao tiếp hay! Hội thoại thực tế. Audio kèm theo tốt.|5|33|English Communication
+Dễ học. Nhưng CD bị xước. Giấy ổn, bìa mềm.|3|33|English Communication
+Practical! Vocabulary hữu ích. Giá hợp lý.|4|33|English Communication
+IELTS preparation tốt! Practice tests nhiều. Giấy trắng, in rõ.|5|34|Cambridge IELTS
+Hay nhưng đáp án có lỗi. Bìa cứng, chất lượng tốt.|4|34|Cambridge IELTS
+Must-have cho thi IELTS! Updated content. Đóng gói cẩn thận.|5|34|Cambridge IELTS
+Japanese beginner tốt! Hiragana Katakana rõ. Giấy tốt, màu sắc đẹp.|5|35|Minna No Nihongo
+Dễ học. Nhưng thiếu audio CD. Giá hơi cao.|3|35|Minna No Nihongo
+Standard textbook! Bài bản. Chất lượng in tốt.|5|35|Minna No Nihongo
+Trung cơ bản hay! Pinyin chuẩn. Giấy tốt, bìa cứng.|5|36|Hán Ngữ Căn Bản
+Characters rõ ràng. Nhưng exercises ít. Giá ok.|4|36|Hán Ngữ Căn Bản
+Good for beginner! Structured well. Giao hàng nhanh.|5|36|Hán Ngữ Căn Bản
+Toán học vui! Giải bài rõ ràng. Hình vẽ đẹp, giấy trắng.|5|37|Toán Vui Lớp 6
+Dễ hiểu cho học sinh. Nhưng đáp án có sai sót. Bìa mềm.|3|37|Toán Vui Lớp 6
+Bổ ích! Nhiều dạng bài. Giá rẻ, chất lượng ổn.|4|37|Toán Vui Lớp 6
+Vật lý 10 hay! Lý thuyết rõ. Hình minh họa đẹp, giấy bóng.|5|38|Vật Lý 10
+Dễ học. Nhưng ví dụ ít. In ấn tốt, bìa cứng.|4|38|Vật Lý 10
+Great textbook! Comprehensive. Giá hợp lý.|5|38|Vật Lý 10
+Hóa học 11 tốt! Công thức đầy đủ. Giấy trắng, in rõ nét.|5|39|Hóa Học 11
+Nội dung đủ. Nhưng lỗi chính tả nhiều. Bìa mềm.|3|39|Hóa Học 11
+Useful for students! Practice hay. Đóng gói kỹ.|4|39|Hóa Học 11
+Sinh học 12 hay! Hình ảnh màu đẹp. Giấy bóng, bìa cứng.|5|40|Sinh Học 12
+Comprehensive. Nhưng hơi khô khan. Giá cao.|3|40|Sinh Học 12
+Good reference! Detailed content. Chất lượng tốt.|4|40|Sinh Học 12
+Văn học 10 tuyệt! Phân tích sâu. Giấy tốt, bìa đẹp.|5|41|Văn Học 10
+Hay cho học sinh. Nhưng thiếu đáp án mẫu. Giá ok.|4|41|Văn Học 10
+Essential textbook! Well-written. Giao đúng hẹn.|5|41|Văn Học 10
+Địa lý 11 hay! Bản đồ rõ nét. Giấy bóng, màu sắc đẹp.|5|42|Địa Lý 11
+Thông tin đầy đủ. Nhưng bản đồ hơi nhỏ. Bìa mềm.|4|42|Địa Lý 11
+Good for exam prep! Charts rõ. Giá hợp lý.|4|42|Địa Lý 11
+Lịch sử 12 tốt! Timeline rõ ràng. Giấy trắng, in đẹp.|5|43|Lịch Sử 12
+Nội dung chuẩn. Nhưng hình ảnh ít. Bìa cứng.|4|43|Lịch Sử 12
+Comprehensive history! Must-study. Chất lượng cao.|5|43|Lịch Sử 12
+GDCD hay! Ví dụ thực tế. Giấy tốt, dễ đọc.|4|44|GDCD 10
+Basic but useful. Giá rẻ. Bìa mềm, nhẹ.|3|44|GDCD 10
+Good for moral education! Simple. Giao nhanh.|4|44|GDCD 10
+Tin học 11 hay! Code examples nhiều. Giấy trắng, in rõ.|5|45|Tin Học 11
+Practical! Nhưng software cũ rồi. Bìa mềm.|3|45|Tin Học 11
+Good intro to IT! Updated content. Giá ok.|4|45|Tin Học 11
+Công nghệ 12 tốt! Projects hay. Hình ảnh đẹp, giấy bóng.|5|46|Công Nghệ 12
+Dễ áp dụng. Nhưng thiếu video tutorials. Bìa cứng.|4|46|Công Nghệ 12
+Useful for students! Creative ideas. Chất lượng tốt.|5|46|Công Nghệ 12
+Sách ôn thi THPT hay! Đề thi đầy đủ. Đáp án chi tiết, giấy trắng.|5|47|Đề Thi THPT
+Nhiều đề luyện. Nhưng một số đề trùng. Giá ok.|4|47|Đề Thi THPT
+Must-have cho thi! Updated questions. Bìa mềm, nhẹ.|5|47|Đề Thi THPT
+Đại học prep tốt! Tips hay. Giấy tốt, in rõ.|5|48|Luyện Thi Đại Học
+Comprehensive review. Nhưng giá hơi cao. Bìa cứng.|4|48|Luyện Thi Đại Học
+Great resource! Practice nhiều. Đóng gói cẩn thận.|5|48|Luyện Thi Đại Học
+

@@ -34,7 +34,7 @@ public class UploadService {
   }
 
   @Transactional
-  public DataSource saveUploadedFile(String name, MultipartFile file) throws IOException {
+  public DataSource saveUploadedFile(String name, MultipartFile file, String modelType) throws IOException {
     String fileName = file.getOriginalFilename();
 
     Path targetFilePath = this.fileStorageLocation.resolve(fileName);
@@ -44,6 +44,7 @@ public class UploadService {
     DataSource dataSource = new DataSource();
     dataSource.setName(name);
     dataSource.setFileUrl(targetFilePath.toString());
+    dataSource.setModelType(modelType);  // ✅ Thêm modelType
 
     return dataSourceRepository.save(dataSource);
   }
