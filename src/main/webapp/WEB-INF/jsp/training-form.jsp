@@ -245,19 +245,35 @@
                     </small>
                 </c:if>
 
-                <div class="data-source-list">
+                <div class="data-source-list" id="dataSourceList">
                     <c:choose>
                         <c:when test="${not empty dataSources}">
                             <c:forEach var="ds" items="${dataSources}">
-                                <label class="data-source-item">
-                                    <input type="checkbox" name="dataSourceIds" value="${ds.id}">
-                                    <div>
-                                        <strong>${ds.name}</strong>
-                                        <small style="color: #6b7280; display: block;">
-                                            Type: ${ds.modelType} | Created: ${fn:substring(ds.createdAt, 0, 16)}
-                                        </small>
+                                <div class="data-source-item-wrapper" data-ds-id="${ds.id}">
+                                    <label class="data-source-item">
+                                        <input type="checkbox" name="dataSourceIds" value="${ds.id}" 
+                                               onchange="toggleDataSourceSamples(${ds.id}, this.checked)">
+                                        <div>
+                                            <strong>${ds.name}</strong>
+                                            <small style="color: #6b7280; display: block;">
+                                                Type: ${ds.modelType} | Created: ${fn:substring(ds.createdAt, 0, 16)}
+                                            </small>
+                                        </div>
+                                    </label>
+                                    <div class="samples-container" id="samples-${ds.id}" style="display: none; margin-top: 10px; padding-left: 30px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                            <span style="font-size: 14px; color: #6b7280;">Chọn mẫu để huấn luyện:</span>
+                                            <button type="button" class="btn-select-all" onclick="selectAllSamples(${ds.id})" style="padding: 4px 12px; font-size: 12px; background: #e5e7eb; color: #374151; border: none; border-radius: 4px; cursor: pointer;">
+                                                Chọn tất cả
+                                            </button>
+                                        </div>
+                                        <div class="samples-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; background: #fff;">
+                                            <div style="text-align: center; color: #6b7280; padding: 20px;">
+                                                Đang tải mẫu...
+                                            </div>
+                                        </div>
                                     </div>
-                                </label>
+                                </div>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
@@ -293,11 +309,102 @@
             window.location.href = '/admin/training/form?modelType=' + modelType;
         }
     }
+
+    // Load samples khi chọn data source
+    function toggleDataSourceSamples(dataSourceId, checked) {
+        const samplesContainer = document.getElementById('samples-' + dataSourceId);
+        
+        if (checked) {
+            samplesContainer.style.display = 'block';
+            loadSamples(dataSourceId);
+        } else {
+            samplesContainer.style.display = 'none';
+            // Uncheck tất cả samples
+            const sampleCheckboxes = samplesContainer.querySelectorAll('input[type="checkbox"][name="sampleIds"]');
+            sampleCheckboxes.forEach(cb => cb.checked = false);
+        }
+    }
     
-    // Validate form trước khi submit
+    // Load samples từ API
+    function loadSamples(dataSourceId) {
+        const samplesList = document.querySelector('#samples-' + dataSourceId + ' .samples-list');
+        if (!samplesList) {
+            console.error('Cannot find samples list container for dataSourceId:', dataSourceId);
+            return;
+        }
+        
+        samplesList.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 20px;">Đang tải mẫu...</div>';
+        
+        console.log('Loading samples for dataSourceId:', dataSourceId);
+        
+        fetch('/admin/training/api/samples/' + dataSourceId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Received data:', data);
+                
+                if (data.samples && Array.isArray(data.samples) && data.samples.length > 0) {
+                    let html = '';
+                    data.samples.forEach((sample, index) => {
+                        // Kiểm tra sample có text không
+                        const sampleText = sample.text || sample.text === '' ? String(sample.text) : '(Không có nội dung)';
+                        const textPreview = sampleText.length > 100 ? sampleText.substring(0, 100) + '...' : sampleText;
+                        
+                        html += '<label style="display: block; padding: 8px; margin-bottom: 6px; border-radius: 4px; cursor: pointer; border-bottom: 1px solid #f3f4f6;" ' +
+                                'onmouseover="this.style.background=\'#f9fafb\'" ' +
+                                'onmouseout="this.style.background=\'transparent\'">' +
+                                '<input type="checkbox" name="sampleIds" value="' + sample.id + '" ' +
+                                'data-ds-id="' + dataSourceId + '" style="margin-right: 8px;">' +
+                                '<span style="font-size: 13px;">' + escapeHtml(textPreview) + '</span>';
+                        
+                        if (sample.rating !== null && sample.rating !== undefined) {
+                            html += '<span style="color: #6b7280; margin-left: 8px;">(Rating: ' + sample.rating + ')</span>';
+                        }
+                        
+                        html += '</label>';
+                    });
+                    samplesList.innerHTML = html;
+                    console.log('Rendered', data.samples.length, 'samples');
+                } else {
+                    console.warn('No samples found or empty array:', data);
+                    samplesList.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 20px;">Không có mẫu nào trong dataset này. (Đã tìm thấy ' + (data.count || 0) + ' mẫu)</div>';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading samples:', error);
+                samplesList.innerHTML = '<div style="text-align: center; color: #b91c1c; padding: 20px;">Lỗi khi tải mẫu: ' + error.message + '. Vui lòng mở Console (F12) để xem chi tiết.</div>';
+            });
+    }
+    
+    // Helper function để escape HTML
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Chọn tất cả samples của một data source
+    function selectAllSamples(dataSourceId) {
+        const samplesContainer = document.getElementById('samples-' + dataSourceId);
+        const sampleCheckboxes = samplesContainer.querySelectorAll('input[type="checkbox"][name="sampleIds"][data-ds-id="' + dataSourceId + '"]');
+        const allChecked = Array.from(sampleCheckboxes).every(cb => cb.checked);
+        
+        sampleCheckboxes.forEach(cb => {
+            cb.checked = !allChecked;
+        });
+        
+        const btn = event.target;
+        btn.textContent = allChecked ? 'Chọn tất cả' : 'Bỏ chọn tất cả';
+    }
+    
+    // Validate và collect sampleIds khi submit
     document.getElementById('trainingForm').addEventListener('submit', function(e) {
         const modelType = document.getElementById('modelType').value;
-        const checkedBoxes = document.querySelectorAll('input[name="dataSourceIds"]:checked');
+        const checkedDataSources = document.querySelectorAll('input[name="dataSourceIds"]:checked');
         
         if (!modelType) {
             e.preventDefault();
@@ -305,11 +412,52 @@
             return false;
         }
         
-        if (checkedBoxes.length === 0) {
+        if (checkedDataSources.length === 0) {
             e.preventDefault();
             alert('Vui lòng chọn ít nhất một nguồn dữ liệu');
             return false;
         }
+        
+        // Collect sampleIds từ các data sources đã chọn (loại bỏ duplicate)
+        const allSampleIdsSet = new Set(); // Dùng Set để tránh duplicate
+        checkedDataSources.forEach(dsCheckbox => {
+            const dataSourceId = dsCheckbox.value;
+            const samplesContainer = document.getElementById('samples-' + dataSourceId);
+            if (samplesContainer) {
+                const sampleCheckboxes = samplesContainer.querySelectorAll('input[type="checkbox"][name="sampleIds"]:checked');
+                sampleCheckboxes.forEach(sampleCb => {
+                    const sampleId = sampleCb.value;
+                    if (sampleId) { // Chỉ thêm nếu có value
+                        allSampleIdsSet.add(sampleId);
+                    }
+                });
+            }
+        });
+        
+        // Convert Set thành Array
+        const allSampleIds = Array.from(allSampleIdsSet);
+        
+        if (allSampleIds.length === 0) {
+            e.preventDefault();
+            alert('Vui lòng chọn ít nhất một mẫu để huấn luyện');
+            return false;
+        }
+        
+        // Xóa hidden input cũ nếu có (tránh duplicate)
+        const oldInput = document.getElementById('sampleIdsInput');
+        if (oldInput) {
+            oldInput.remove();
+        }
+        
+        // Thêm hidden input với sampleIds (unique)
+        const sampleIdsInput = document.createElement('input');
+        sampleIdsInput.type = 'hidden';
+        sampleIdsInput.name = 'sampleIds';
+        sampleIdsInput.id = 'sampleIdsInput';
+        sampleIdsInput.value = allSampleIds.join(',');
+        this.appendChild(sampleIdsInput);
+        
+        console.log('Submitting with sampleIds:', allSampleIds.length, 'unique samples:', allSampleIds);
     });
 </script>
 

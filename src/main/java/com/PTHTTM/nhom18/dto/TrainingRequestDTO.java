@@ -14,7 +14,8 @@ public class TrainingRequestDTO {
   private Long jobId;
   private String versionName;
   private List<Long> dataSourceIds;
-  private String modelType;  // "general" or "aspect" - REQUIRED
-  private Integer epochs = 10;
+  private List<Long> sampleIds;
+  private String modelType;
+  private Integer epochs = 1;
   private Integer batchSize = 4;
 }

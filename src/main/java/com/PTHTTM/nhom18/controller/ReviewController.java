@@ -29,24 +29,9 @@ public class ReviewController {
   public String handleUpload(
       @RequestParam("file")MultipartFile file,
       @RequestParam("dataSourceName") String name,
-      @RequestParam("modelType") String modelType,  // ✅ Thêm modelType
+      @RequestParam("modelType") String modelType,
       RedirectAttributes redirectAttributes
   ) throws IOException {
-
-    if (file.isEmpty()) {
-      redirectAttributes.addFlashAttribute("error", "File is empty");
-      return "redirect:/admin/data/upload";
-    }
-
-    if (name == null || name.trim().isEmpty()) {
-      redirectAttributes.addFlashAttribute("error", "Please provide a name for the data source.");
-      return "redirect:/admin/data/upload";
-    }
-
-    if (modelType == null || modelType.trim().isEmpty()) {
-      redirectAttributes.addFlashAttribute("error", "Vui lòng chọn loại model (General hoặc Aspect)");
-      return "redirect:/admin/data/upload";
-    }
 
     this.uploadService.saveUploadedFile(name, file, modelType);
     redirectAttributes.addFlashAttribute("message", "Upload thành công!");

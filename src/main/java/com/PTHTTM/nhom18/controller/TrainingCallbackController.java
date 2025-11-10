@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * REST API Controller để nhận callback từ Python Training Service
- */
+
 @RestController
 @RequestMapping("/api/training")
 public class TrainingCallbackController {
@@ -21,10 +19,6 @@ public class TrainingCallbackController {
         this.trainingJobService = trainingJobService;
     }
 
-    /**
-     * Endpoint để Python service gọi sau khi training xong
-     * URL: POST http://localhost:8080/api/training/callback/{jobId}
-     */
     @PostMapping("/callback/{jobId}")
     public ResponseEntity<String> handleTrainingCallback(
             @PathVariable Long jobId,
@@ -51,6 +45,11 @@ public class TrainingCallbackController {
         }
     }
 }
+
+
+
+
+
 
 
 

@@ -35,4 +35,7 @@ public class DataSource {
   @Column(name = "file_url")
   private String fileUrl;
 
+  @OneToMany(mappedBy = "dataSource", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<DataSourceSample> samples = new ArrayList<>();
+
 }

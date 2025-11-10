@@ -263,15 +263,15 @@
                                 <div class="val"><fmt:formatNumber value="${result.accuracy}" pattern="#0.0000" /></div>
                             </div>
                             <div class="metric">
-                                <h4>Điểm F1 (Macro)</h4>
+                                <h4>Điểm F1</h4>
                                 <div class="val"><fmt:formatNumber value="${result.f1Score}" pattern="#0.0000" /></div>
                             </div>
                             <div class="metric">
-                                <h4>Precision (Macro)</h4>
+                                <h4>Precision</h4>
                                 <div class="val"><fmt:formatNumber value="${result.precision}" pattern="#0.0000" /></div>
                             </div>
                             <div class="metric">
-                                <h4>Recall (Macro)</h4>
+                                <h4>Recall</h4>
                                 <div class="val"><fmt:formatNumber value="${result.recall}" pattern="#0.0000" /></div>
                             </div>
                         </div>

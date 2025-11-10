@@ -64,12 +64,20 @@ public class TrainingJobService {
   }
 
   public TrainingJob createTrainingJob(String versionName, List<Long> dataSourceIds) {
-    throw new IllegalArgumentException("modelType is required. Use createTrainingJob(versionName, dataSourceIds, modelType)");
+    throw new IllegalArgumentException("modelType is required. Use createTrainingJob(versionName, dataSourceIds, sampleIds, modelType)");
   }
 
   public TrainingJob createTrainingJob(String versionName, List<Long> dataSourceIds, String modelType) {
+    throw new IllegalArgumentException("sampleIds is required. Use createTrainingJob(versionName, dataSourceIds, sampleIds, modelType)");
+  }
+
+  public TrainingJob createTrainingJob(String versionName, List<Long> dataSourceIds, List<Long> sampleIds, String modelType) {
     if (modelType == null || modelType.isEmpty()) {
       throw new IllegalArgumentException("modelType cannot be null or empty");
+    }
+    
+    if (sampleIds == null || sampleIds.isEmpty()) {
+      throw new IllegalArgumentException("sampleIds cannot be null or empty");
     }
     
     ModelVersion version = modelVersionService.createVersion(versionName, modelType);
@@ -79,7 +87,6 @@ public class TrainingJobService {
     job.setStatus("STARTED");
     TrainingJob savedJob = trainingJobRepository.save(job);
 
-    // Lưu mapping giữa job và data sources - QUAN TRỌNG: để biết model được train từ data nào
     for (Long dataSourceId : dataSourceIds) {
       TrainingJobDataSource mapping = new TrainingJobDataSource();
       mapping.setTrainingJob(savedJob);
@@ -93,8 +100,8 @@ public class TrainingJobService {
     request.setJobId(savedJob.getId());
     request.setVersionName(versionName);
     request.setDataSourceIds(dataSourceIds);
-    request.setModelType(modelType); // Python service sẽ xử lý khác nhau dựa trên modelType này
-
+    request.setSampleIds(sampleIds);
+    request.setModelType(modelType);
     startPythonTraining(request, savedJob);
     return savedJob;
   }
@@ -110,9 +117,6 @@ public class TrainingJobService {
     }
   }
 
-    /**
-     * Lấy danh sách data sources đã được sử dụng để train một job cụ thể
-     */
     public List<DataSource> getDataSourcesUsedForTraining(Long jobId) {
         List<TrainingJobDataSource> mappings = trainingJobDataSourceRepository.findByTrainingJobId(jobId);
         List<DataSource> dataSources = new ArrayList<>();
@@ -137,7 +141,7 @@ public class TrainingJobService {
         if (modelVersion == null) {
             job.setStatus("FAILED");
             job.setErrorMessage("Không tìm thấy ModelVersion liên kết.");
-            trainingJobRepository.save(job); // Lưu trạng thái FAILED
+            trainingJobRepository.save(job);
             return;
         }
 
@@ -152,7 +156,6 @@ public class TrainingJobService {
             trainingResult.setJob(job);
 
             if (payload.getMetrics() != null) {
-                // Null-safe get with default 0.0
                 trainingResult.setAccuracy(payload.getMetrics().getOrDefault("eval_accuracy", 0.0));
                 trainingResult.setRecall(payload.getMetrics().getOrDefault("eval_recall_macro", 0.0));
                 trainingResult.setPrecision(payload.getMetrics().getOrDefault("eval_precision_macro", 0.0));

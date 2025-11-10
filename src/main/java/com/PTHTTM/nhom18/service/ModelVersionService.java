@@ -57,7 +57,6 @@ public class ModelVersionService {
     newVersion.setActive(true);
     modelVersionRepository.save(newVersion);
 
-    // Không cần gọi Python API - chỉ cần update DB là đủ
     return true;
   }
 
@@ -68,7 +67,7 @@ public class ModelVersionService {
   public ModelVersion findActiveModelVersion() {
     List<ModelVersion> activeVersions = this.modelVersionRepository.findByActive(true);
     if (activeVersions.isEmpty()) {
-      return null;  // Hoặc throw exception tùy logic
+      return null;
     }
     return activeVersions.get(0);
   }

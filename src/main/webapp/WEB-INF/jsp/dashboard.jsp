@@ -225,7 +225,7 @@
                             <c:when test="${not empty generalResult}">
                                 <div class="metrics">
                                     <div class="metric">
-                                        <h4>Điểm F1 (Macro)</h4>
+                                        <h4>Điểm F1</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${generalResult.f1Score}" pattern="#0.0000" />
                                         </div>
@@ -237,13 +237,13 @@
                                         </div>
                                     </div>
                                     <div class="metric">
-                                        <h4>Precision (Macro)</h4>
+                                        <h4>Precision</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${generalResult.precision}" pattern="#0.0000" />
                                         </div>
                                     </div>
                                     <div class="metric">
-                                        <h4>Recall (Macro)</h4>
+                                        <h4>Recall</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${generalResult.recall}" pattern="#0.0000" />%
                                         </div>
@@ -293,7 +293,7 @@
                             <c:when test="${not empty aspectResult}">
                                 <div class="metrics">
                                     <div class="metric">
-                                        <h4>Điểm F1 (Macro)</h4>
+                                        <h4>Điểm F1</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${aspectResult.f1Score}" pattern="#0.0000" />
                                         </div>
@@ -305,13 +305,13 @@
                                         </div>
                                     </div>
                                     <div class="metric">
-                                        <h4>Precision (Macro)</h4>
+                                        <h4>Precision</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${aspectResult.precision}" pattern="#0.0000" />
                                         </div>
                                     </div>
                                     <div class="metric">
-                                        <h4>Recall (Macro)</h4>
+                                        <h4>Recall</h4>
                                         <div class="val">
                                             <fmt:formatNumber value="${aspectResult.recall}" pattern="#0.0000" />%
                                         </div>
