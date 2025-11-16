@@ -51,6 +51,10 @@
         padding: 8px 12px;
         border-radius: 8px;
         font-weight: 500;
+        transition: all 0.2s;
+      }
+      .tab:hover {
+        background: #f3f4f6;
       }
       .tab.active {
         background: var(--primary-weak);
@@ -194,9 +198,8 @@
 <header>
     <div class="tabs">
         <a class="tab" href="/admin/dashboard">Bảng điều khiển</a>
-        <a class="tab" href="/admin/data/upload">Quản lý dữ liệu</a>
-        <a class="tab active" href="/admin/training/form">Huấn luyện Mô hình</a>
-        <%-- <a class="tab" href="/admin/dashboard">Bảng điều khiển</a> --%>
+        <a class="tab" href="/admin/data/list">Quản lý dữ liệu</a>
+        <a class="tab active" href="/admin/training/form">Huấn luyện</a>
     </div>
 </header>
 
@@ -286,7 +289,7 @@
                                         Vui lòng chọn loại model ở trên để hiển thị nguồn dữ liệu tương ứng.
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="/admin/data/upload">Tải lên dữ liệu mới</a>
+                                <a href="/admin/data/list">Tải lên dữ liệu mới</a>
                             </p>
                         </c:otherwise>
                     </c:choose>

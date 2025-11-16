@@ -26,9 +26,6 @@ public class DataSource {
   @Column(nullable = false)
   private String name;
 
-  @Column(name = "model_type", nullable = false)
-  private String modelType;  // "general" hoặc "aspect"
-
   @Column(name = "created_at", nullable = false)
   private LocalDateTime createdAt = LocalDateTime.now();
 

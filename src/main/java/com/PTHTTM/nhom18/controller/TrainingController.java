@@ -47,20 +47,10 @@ public class TrainingController {
   }
 
   @GetMapping("/form")
-  public String trainingPage(
-      @RequestParam(value = "modelType", required = false) String modelType,
-      Model model
-  ) {
-    List<DataSource> sourceList;
-    
-    if (modelType != null && !modelType.isEmpty()) {
-      sourceList = this.dataSourceService.getDataSourceByType(modelType);
-    } else {
-      sourceList = this.dataSourceService.getDataSource();
-    }
+  public String trainingPage(Model model) {
+    List<DataSource> sourceList = this.dataSourceService.getDataSource();
     
     model.addAttribute("dataSources", sourceList);
-    model.addAttribute("selectedModelType", modelType);
 
     return "training-form";
   }
@@ -91,18 +81,17 @@ public class TrainingController {
     List<Long> sampleIds = null;
     if (sampleIdsStr != null && !sampleIdsStr.trim().isEmpty()) {
       String[] parts = sampleIdsStr.split(",");
-      Set<Long> sampleIdsSet = new HashSet<>(); // Dùng Set để loại duplicate
+      Set<Long> sampleIdsSet = new HashSet<>();
       for (String part : parts) {
         try {
           Long id = Long.parseLong(part.trim());
-          if (id > 0) { // Chỉ thêm ID hợp lệ
+          if (id > 0) {
             sampleIdsSet.add(id);
           }
         } catch (NumberFormatException e) {
-          // Ignore invalid IDs
         }
       }
-      sampleIds = new ArrayList<>(sampleIdsSet); // Convert Set thành List
+      sampleIds = new ArrayList<>(sampleIdsSet);
     }
 
     if (sampleIds == null || sampleIds.isEmpty()) {

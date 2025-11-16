@@ -29,11 +29,10 @@ public class ReviewController {
   public String handleUpload(
       @RequestParam("file")MultipartFile file,
       @RequestParam("dataSourceName") String name,
-      @RequestParam("modelType") String modelType,
       RedirectAttributes redirectAttributes
   ) throws IOException {
 
-    this.uploadService.saveUploadedFile(name, file, modelType);
+    this.uploadService.saveUploadedFile(name, file);
     redirectAttributes.addFlashAttribute("message", "Upload thành công!");
     return "redirect:/admin/data/upload";
   }

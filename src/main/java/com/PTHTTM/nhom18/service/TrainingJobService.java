@@ -156,11 +156,23 @@ public class TrainingJobService {
             trainingResult.setJob(job);
 
             if (payload.getMetrics() != null) {
-                trainingResult.setAccuracy(payload.getMetrics().getOrDefault("eval_accuracy", 0.0));
-                trainingResult.setRecall(payload.getMetrics().getOrDefault("eval_recall_macro", 0.0));
-                trainingResult.setPrecision(payload.getMetrics().getOrDefault("eval_precision_macro", 0.0));
-                trainingResult.setF1Score(payload.getMetrics().getOrDefault("eval_f1_macro", 0.0));
+                logger.info("Metrics received: {}", payload.getMetrics());
+                logger.info("Metrics keys: {}", payload.getMetrics().keySet());
+                
+                Double accuracy = payload.getMetrics().getOrDefault("eval_accuracy", 0.0);
+                Double recall = payload.getMetrics().getOrDefault("eval_recall_macro", 0.0);
+                Double precision = payload.getMetrics().getOrDefault("eval_precision_macro", 0.0);
+                Double f1Score = payload.getMetrics().getOrDefault("eval_f1_macro", 0.0);
+                
+                logger.info("Parsed metrics - accuracy: {}, recall: {}, precision: {}, f1: {}", 
+                           accuracy, recall, precision, f1Score);
+                
+                trainingResult.setAccuracy(accuracy);
+                trainingResult.setRecall(recall);
+                trainingResult.setPrecision(precision);
+                trainingResult.setF1Score(f1Score);
             } else {
+                logger.warn("Metrics is null in callback payload");
                 trainingResult.setPrecision(0.0);
                 trainingResult.setF1Score(0.0);
                 trainingResult.setAccuracy(0.0);

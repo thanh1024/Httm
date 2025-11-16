@@ -9,8 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface DataSourceRepository extends JpaRepository<DataSource, Long> {
   List<DataSource> findAllByOrderByCreatedAtDesc();
   
-  List<DataSource> findByModelType(String modelType);
-  
-  List<DataSource> findByModelTypeOrderByCreatedAtDesc(String modelType);
 
 }

@@ -196,7 +196,7 @@
     <div class="tabs">
         <a class="tab active" href="/admin/dashboard">Bảng điều khiển</a>
         <a class="tab" href="/admin/training/form">Huấn luyện Mô hình</a>
-        <a class="tab" href="/admin/data/upload">Quản lý Dữ liệu</a>
+        <a class="tab" href="/admin/data/list">Quản lý Dữ liệu</a>
     </div>
 </header>
 

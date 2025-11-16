@@ -49,7 +49,7 @@ public class UploadService {
   }
 
   @Transactional
-  public DataSource saveUploadedFile(String name, MultipartFile file, String modelType) throws IOException {
+  public DataSource saveUploadedFile(String name, MultipartFile file) throws IOException {
     String fileName = file.getOriginalFilename();
 
     Path targetFilePath = this.fileStorageLocation.resolve(fileName);
@@ -59,7 +59,6 @@ public class UploadService {
     DataSource dataSource = new DataSource();
     dataSource.setName(name);
     dataSource.setFileUrl(targetFilePath.toString());
-    dataSource.setModelType(modelType);
     
     DataSource savedDataSource = dataSourceRepository.save(dataSource);
     
@@ -167,13 +166,9 @@ public class UploadService {
       logger.info("Đã parse và lưu {} mẫu từ file {}", rowIndex, file.getOriginalFilename());
     }
   }
-  
-  /**
-   * Parse một dòng CSV, hỗ trợ các separator: |, ,, \t
-   */
+
   private String[] parseCSVLine(String line) {
-    // Thử các separator theo thứ tự: |, ,, \t
-    // Lưu ý: | là special character trong regex, cần escape bằng Pattern.quote()
+
     String[] separators = {"|", ",", "\t"};
     
     for (String sep : separators) {
